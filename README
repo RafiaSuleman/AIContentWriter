@@ -1,0 +1,14 @@
+# 🚀 AI-Powered Content Dashboard
+
+A modern, full-stack web application that allows users to generate AI content dynamically. Built to bridge the gap between static web development and powerful Python-backed AI services.
+
+## 🛠️ Tech Stack
+- **Frontend:** Next.js, TypeScript, Tailwind CSS
+- **Backend:** Python, FastAPI, Uvicorn
+- **AI Integration:** Groq Cloud API (`openai/gpt-oss-120b` model)
+- **Environment & Tools:** `uv` package manager, `.env` for secure configuration
+
+## ✨ Key Features
+- **Asynchronous Communication:** Seamless REST API integration between the Next.js frontend and FastAPI backend.
+- **High-Speed LLM Inference:** Powered by Groq's cutting-edge open-weight models for instant results.
+- **Robust Error Handling & Security:** Managed CORS middleware, input validation via Pydantic models, and secure API key handling.
