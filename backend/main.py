@@ -4,16 +4,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from groq import Groq
 from dotenv import load_dotenv
+from mangum import Mangum  # <-- Yeh import karein
 
-# Environment variables load karein
 load_dotenv()
 
 app = FastAPI(title="AI Content Writer Backend")
 
-# CORS middleware for Next.js frontend connection
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["*"],  # Sab origins allow kar dein taake frontend se easily connect ho
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -42,3 +41,6 @@ def generate_content(data: PromptRequest):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+# Vercel serverless handler
+handler = Mangum(app)
