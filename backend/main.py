@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from groq import Groq
 from dotenv import load_dotenv
-from mangum import Mangum  # <-- Yeh import karein
+from mangum import Mangum
 
 load_dotenv()
 
@@ -12,11 +12,16 @@ app = FastAPI(title="AI Content Writer Backend")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Sab origins allow kar dein taake frontend se easily connect ho
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Home route (backend live hone ka check)
+@app.get("/")
+def home():
+    return {"message": "AI Content Writer Backend is running successfully!"}
 
 class PromptRequest(BaseModel):
     prompt: str
@@ -42,5 +47,5 @@ def generate_content(data: PromptRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# Vercel serverless handler
+# Vercel handler
 handler = Mangum(app)
